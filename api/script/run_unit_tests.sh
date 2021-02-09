@@ -2,8 +2,9 @@
 
 # should be run from top-level directory in repo
 main() {
-  test_directory=$(pwd)/api
-  PYTHONPATH="${test_directory}" python -m pytest "${test_directory}"
+  app_directory=$(pwd)/api
+  test_directory="${app_directory}/test"
+  PYTHONPATH="${app_directory}" python -m pytest "${test_directory}"
 }
 
 main
