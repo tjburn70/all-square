@@ -8,7 +8,6 @@ import pytest
 GOLF_COURSE_REPO_IMPORT_PATH = "api.controllers.golf_course.golf_course_repo"
 TEE_BOX_REPO_IMPORT_PATH = "api.controllers.golf_course.tee_box_repo"
 HOLE_REPO_IMPORT_PATH = "api.controllers.golf_course.hole_repo"
-SEARCH_SERVICE_IMPORT_PATH = "api.controllers.golf_club.golf_club_service.SearchService"
 
 
 class TestGolfCourseController:
