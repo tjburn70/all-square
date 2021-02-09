@@ -49,6 +49,29 @@ def golf_club_id():
 
 
 @pytest.fixture
+def tee_box_dict():
+    return dict(
+        tee_color="Black",
+        par=71,
+        distance=7334,
+        unit="yards",
+        course_rating=75.6,
+        slope=148.0,
+    )
+
+
+@pytest.fixture
+def tee_box_model(tee_box_id, golf_course_id, tee_box_dict):
+    return TeeBox(
+        id=tee_box_id,
+        golf_course_id=golf_course_id,
+        created_ts=datetime.now(),
+        touched_ts=None,
+        **tee_box_dict,
+    )
+
+
+@pytest.fixture
 def blue_tee_box(tee_box_id, golf_course_id):
     return TeeBox(
         id=tee_box_id,
