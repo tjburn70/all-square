@@ -14,7 +14,7 @@ GOLF_COURSE_REPO_IMPORT_PATH = "api.controllers.golf_club.golf_course_repo"
 SEARCH_SERVICE_IMPORT_PATH = "api.controllers.golf_club.golf_club_service.SearchService"
 
 
-class TestGolfClub:
+class TestGolfClubController:
 
     @patch(GOLF_CLUB_REPO_IMPORT_PATH)
     def test_get_golf_clubs(
