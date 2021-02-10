@@ -27,7 +27,7 @@ class TestGolfCourseController:
         assert resp.status_code == HTTPStatus.OK, \
             f"GET /golf-courses failed with status_code = {resp.status_code}, " \
             f"expected to receive a status_code: {HTTPStatus.OK}"
-        assert len(resp.json['result']) == 1, "Expecting there to be 2 golf courses returned"
+        assert len(resp.json['result']) == 1, "Expecting there to be 1 golf courses returned"
         assert mock_golf_course_repo.get_all.called, "Expecting golf_course_repo.get_all to be called"
 
     @patch(GOLF_COURSE_REPO_IMPORT_PATH)
