@@ -142,7 +142,6 @@ class TestGolfCourseController:
             tee_box_model,
             content_type_header,
     ):
-        mock_tee_box_repo.get_by_golf_course_id.return_value = [tee_box_model]
         path = f"/api/golf-courses/{golf_course_id}/tee-boxes"
         payload = json.dumps(tee_box_dict, default=str)
         resp = client.post(path, headers=content_type_header, data=payload)
