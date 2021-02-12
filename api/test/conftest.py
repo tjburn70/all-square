@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 
 import pytest
 
@@ -8,6 +8,7 @@ from api.models import (
     TeeBox,
     GolfCourse,
     GolfClub,
+    GolfRound,
 )
 
 
@@ -46,6 +47,11 @@ def golf_course_id():
 @pytest.fixture
 def golf_club_id():
     return 1
+
+
+@pytest.fixture
+def test_user_id():
+    return -1
 
 
 @pytest.fixture
@@ -492,3 +498,48 @@ def olympia_fields(
         touched_ts=None,
         golf_courses=[olympia_fields_north_course, olympia_fields_south_course],
     )
+
+
+@pytest.fixture
+def golf_round_factory(golf_course_id, tee_box_id):
+    def _golf_round_factory(**kwargs):
+        _id = kwargs.get('id') or -1
+        _golf_course_id = kwargs.get('golf_course_id') or golf_course_id
+        _tee_box_id = kwargs.get('tee_box_id') or tee_box_id
+        user_id = kwargs.get('user_id') or -1
+        gross_score = kwargs.get('gross_score') or 80
+        towards_handicap = kwargs.get('towards_handicap') or True
+        played_on = kwargs.get('played_on') or date.today()
+        created_ts = kwargs.get('created_ts') or datetime.now()
+        stats = kwargs.get('stats') or []
+        return GolfRound(
+            id=_id,
+            golf_course_id=_golf_course_id,
+            tee_box_id=_tee_box_id,
+            user_id=user_id,
+            gross_score=gross_score,
+            towards_handicap=towards_handicap,
+            played_on=played_on,
+            created_ts=created_ts,
+            touched_ts=None,
+            stats=stats,
+        )
+    return _golf_round_factory
+
+
+@pytest.fixture
+def golf_round_post_body_factory(golf_course_id, tee_box_id):
+    def _golf_round_post_body_factory(**kwargs):
+        _golf_course_id = kwargs.get('golf_course_id') or golf_course_id
+        _tee_box_id = kwargs.get('tee_box_id') or tee_box_id
+        gross_score = kwargs.get('gross_score') or 80
+        towards_handicap = kwargs.get('towards_handicap') or True
+        played_on = kwargs.get('played_on') or date.today()
+        return {
+            "golf_course_id": golf_course_id,
+            "tee_box_id": tee_box_id,
+            "gross_score": gross_score,
+            "towards_handicap": towards_handicap,
+            "played_on": played_on,
+        }
+    return _golf_round_post_body_factory
