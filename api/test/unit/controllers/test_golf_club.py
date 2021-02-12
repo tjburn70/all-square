@@ -1,4 +1,5 @@
 import json
+import copy
 from datetime import datetime
 from unittest.mock import patch
 from http import HTTPStatus
@@ -179,7 +180,7 @@ class TestGolfClubController:
             f"POST {path} failed with status_code = {resp.status_code}, " \
             f"expected to receive a status_code: {HTTPStatus.OK}"
         assert mock_golf_course_repo.create.called, "Expecting golf_club_repo.get to be called"
-        expected_payload = golf_course_post_body.copy()
+        expected_payload = copy.deepcopy(golf_course_post_body)
         expected_payload['golf_club_id'] = golf_club_id
         mock_golf_course_repo.create.assert_called_with(data=expected_payload)
         assert mock_add_golf_course.called, "Expecting SearchService.add_golf_course to be called"
