@@ -96,7 +96,6 @@ def golf_round_stats(golf_round_id):
 
 
 @blueprint.route('/golf-round-stats/summary', methods=['GET'])
-@requires_json_content
 @jwt_required
 def stats_summary():
     user_id = get_jwt_identity()
