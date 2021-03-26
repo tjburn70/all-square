@@ -71,7 +71,6 @@ def delete_golf_round(golf_round_id):
 
 
 @blueprint.route('/<int:user_id>', methods=['GET'])
-@requires_json_content
 def golf_rounds_by_user_id(user_id):
     # TODO: Implement Authentication for server to server auth
     service = golf_round_service.GolfRoundService(
@@ -97,7 +96,6 @@ def golf_round_stats(golf_round_id):
 
 
 @blueprint.route('/golf-round-stats/summary', methods=['GET'])
-@requires_json_content
 @jwt_required
 def stats_summary():
     user_id = get_jwt_identity()
